@@ -17,7 +17,6 @@ public class RoomScript : MonoBehaviour
 
     public void Test(WallType type)
     {
-        Debug.Log((int)type);
         quads[(int)type].SetActive(false);
     }
 }

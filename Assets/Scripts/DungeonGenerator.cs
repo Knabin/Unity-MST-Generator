@@ -53,6 +53,7 @@ public class DungeonGenerator : MonoBehaviour {
     Random random;
     Grid<CellType> grid;
     List<Room> rooms;
+    List<Vector2Int> doors;
     Room bossRoom;
     Delaunay delaunay;
     HashSet<Prim.Edge> selectedEdges;
@@ -65,6 +66,7 @@ public class DungeonGenerator : MonoBehaviour {
         random = new Random(UnityEngine.Random.Range(0, int.MaxValue));
         grid = new Grid<CellType>(size, Vector2Int.zero);
         rooms = new List<Room>();
+        doors = new List<Vector2Int>();
 
         if (PlaceRooms())
         {
@@ -238,11 +240,22 @@ public class DungeonGenerator : MonoBehaviour {
             });
 
             if (path != null) {
+                bool first = false;
+                Vector2Int last = Vector2Int.zero;
                 for (int i = 0; i < path.Count; i++) {
                     var current = path[i];
 
                     if (grid[current] == CellType.None) {
                         grid[current] = CellType.Hallway;
+
+                        if (first == false)
+                        {
+                            // startpos 쪽으로 한 칸 이동?
+                            doors.Add(current);
+                            first = true;
+                        }
+
+                        last = current;
                     }
 
                     if (i > 0) {
@@ -250,6 +263,12 @@ public class DungeonGenerator : MonoBehaviour {
 
                         var delta = current - prev;
                     }
+                }
+
+                if (last != Vector2Int.zero)
+                {
+                    // endpos 쪽으로 한 칸 이동?
+                    doors.Add(last);
                 }
             }
         }
@@ -262,6 +281,11 @@ public class DungeonGenerator : MonoBehaviour {
                     PlaceHallway(new Vector2Int(i, j));
                 }
             }
+        }
+
+        foreach (var door in doors)
+        {
+            Debug.Log(door);
         }
     }
     static int roomCounts = 1;
@@ -341,8 +365,11 @@ public class DungeonGenerator : MonoBehaviour {
         {
             for (int j = 0; j < size.y; ++j)
             {
-                // TODO : Out of index 처리
-                PlaceRoom(location + new Vector2Int(i, j), Vector2Int.one);
+                // TODO : Out of index 처리.. 뭔가 이상하게 동작 중
+                //PlaceRoom(location + new Vector2Int(i, j), Vector2Int.one);
+                PlaceRoom(new Vector2Int(
+                    Math.Max(size.x, location.x + i),
+                    Math.Max(size.y, location.y + j)), Vector2Int.one);
             }
         }
     }

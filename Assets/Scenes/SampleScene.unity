@@ -330,8 +330,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 68b1cb2bc0a6cb24bb16c40f63b991da, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  size: {x: 100, y: 100}
-  roomCount: 50
+  size: {x: 50, y: 50}
+  roomCount: 20
   roomMinSize: {x: 5, y: 5}
   roomMaxSize: {x: 8, y: 8}
   bossRoomMinSize: {x: 8, y: 8}
