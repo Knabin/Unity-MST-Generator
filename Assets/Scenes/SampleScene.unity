@@ -333,7 +333,7 @@ MonoBehaviour:
   size: {x: 100, y: 100}
   roomCount: 50
   roomMinSize: {x: 5, y: 5}
-  roomMaxSize: {x: 10, y: 10}
+  roomMaxSize: {x: 8, y: 8}
   bossRoomMinSize: {x: 8, y: 8}
   bossRoomMaxSize: {x: 12, y: 12}
   cubePrefab: {fileID: 7415050535990569633, guid: a86f15942167c1149a1fb62561ccee51, type: 3}

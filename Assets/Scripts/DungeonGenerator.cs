@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -340,7 +341,9 @@ public class DungeonGenerator : MonoBehaviour {
         {
             for (int j = 0; j < size.y; ++j)
             {
-                PlaceRoom(location + new Vector2Int(i, j), Vector2Int.one);
+                PlaceRoom(new Vector2Int(
+                    Math.Max(size.x, location.x + i),
+                    Math.Max(size.y, location.y + j)), Vector2Int.one);
             }
         }
     }
