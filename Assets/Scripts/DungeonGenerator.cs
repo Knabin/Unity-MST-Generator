@@ -341,9 +341,8 @@ public class DungeonGenerator : MonoBehaviour {
         {
             for (int j = 0; j < size.y; ++j)
             {
-                PlaceRoom(new Vector2Int(
-                    Math.Max(size.x, location.x + i),
-                    Math.Max(size.y, location.y + j)), Vector2Int.one);
+                // TODO : Out of index 처리
+                PlaceRoom(location + new Vector2Int(i, j), Vector2Int.one);
             }
         }
     }
